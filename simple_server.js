@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var app = express();
-app.set('port', 3300);
+app.set('port', process.env.PORT);
 
 //Configuring Express App to make use of BodyParser's JSON parser to parse
 //JSON request body
