@@ -2,6 +2,9 @@
 //Express is required for creating Node.js based web apps
 var express = require('express');
 
+//NPM Module to integrate Handlerbars UI template engine with Express
+var exphbs  = require('express-handlebars');
+
 //body-parser is used to parse the Request body and populate the req.
 var bodyParser = require('body-parser');
 
@@ -10,6 +13,14 @@ var mongoose = require('mongoose');
 
 var app = express();
 app.set('port', process.env.PORT);
+
+//Declaring Express to use Handlerbars template engine with main.handlebars as
+//the default layout
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+//Defining middleware to serve static files
+// app.use('/static', express.static('public'));
 
 //Configuring Express App to make use of BodyParser's JSON parser to parse
 //JSON request body
@@ -38,6 +49,13 @@ mongoose.connection;
 //Starting up the server on the port: 3300
 app.listen(app.get('port'), function(){
   console.log('Server up: http://localhost:' + app.get('port'));
+});
+
+// Add route and view for homepage
+app.get("/", function(req, res){
+  console.log("Redering homepage");
+  
+  res.render("home");
 });
 
 //Get the details of the book with the given isbn
