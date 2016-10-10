@@ -2,6 +2,9 @@
 //Express is required for creating Node.js based web apps
 var express = require('express');
 
+// Path module for resolving file paths
+var path = require('path');
+
 //NPM Module to integrate Handlerbars UI template engine with Express
 var exphbs  = require('express-handlebars');
 
@@ -57,6 +60,10 @@ app.get("/", function(req, res){
   
   res.render("home");
 });
+
+// Render static page
+app.use('/test', express.static(path.resolve(__dirname, 'views'), {
+  extensions: ['html']}));
 
 //Get the details of the book with the given isbn
 app.get('/book/:isbn', function(req, res){
