@@ -62,8 +62,9 @@ app.get("/", function(req, res){
 });
 
 // Render static page
-app.use('/test', express.static(path.resolve(__dirname, 'views'), {
-  extensions: ['html']}));
+app.use('/test', express.static(
+  path.resolve(__dirname, 'views'), 
+  {extensions: ['html']}));
 
 //Get the details of the book with the given isbn
 app.get('/book/:isbn', function(req, res){
